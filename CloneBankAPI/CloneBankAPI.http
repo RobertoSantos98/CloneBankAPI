@@ -1,0 +1,6 @@
+@CloneBankAPI_HostAddress = http://localhost:5211
+
+GET {{CloneBankAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
