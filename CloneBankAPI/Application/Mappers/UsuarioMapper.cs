@@ -17,7 +17,6 @@ namespace CloneBankAPI.Application.Mappers
                     usuario.DateOfBirth,
                     usuario.CPF,
                     usuario.Email,
-                    usuario.PasswordHashed,
                     contas
                 );
         }

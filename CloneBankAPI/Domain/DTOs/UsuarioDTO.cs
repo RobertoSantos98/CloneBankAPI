@@ -9,7 +9,6 @@ namespace CloneBankAPI.Domain.DTOs
         DateOnly DateOfBirth,
         string CPF,
         string Email,
-        string PasswordHashed,
         List<ContaDTO> Contas = null! // Default to null, will be initialized in the Usuario model
         );
     

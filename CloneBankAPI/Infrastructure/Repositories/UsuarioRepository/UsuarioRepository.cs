@@ -20,7 +20,7 @@ namespace CloneBankAPI.Infrastructure.Repositories.UsuarioRepository
 
         public async Task<List<Usuario>> GetAllUsuario()
         {
-            return await _context.Usuarios.ToListAsync();
+            return await _context.Usuarios.Include(u => u.Contas).ToListAsync();
         }
 
         public async Task<Usuario?> GetUsuarioByEmail(string email)
@@ -41,6 +41,11 @@ namespace CloneBankAPI.Infrastructure.Repositories.UsuarioRepository
         public async Task CommitChanges()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateUsuario(Usuario usuario)
+        {
+            _context.Update(usuario);
         }
     }
 }

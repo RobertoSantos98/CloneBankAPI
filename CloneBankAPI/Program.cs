@@ -4,6 +4,12 @@ using CloneBankAPI.Infrastructure.Repositories.UsuarioRepository;
 using CloneBankAPI.Application.Services.UsuarioService.UseCase.CreateUser;
 using CloneBankAPI.Application.Util.PasswordHash;
 using CloneBankAPI.Application.Services.UsuarioService;
+using CloneBankAPI.Infrastructure.Repositories.ContaRepository;
+using CloneBankAPI.Application.Services.ContaService.UseCase.CreateCount;
+using System.Text.Json.Serialization;
+using CloneBankAPI.Infrastructure.Repositories.TransferenciaRepository;
+using CloneBankAPI.Application.Services.TransferenciaService;
+using CloneBankAPI.Application.Services.TransferenciaService.ServicesPackage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +26,23 @@ builder.Services.AddDbContext<DbConnection>(options =>
     .GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IContaRepository, ContaRepository>();
+builder.Services.AddScoped<ITransferenciaRepository, TransferenciaRepository>();
 
 builder.Services.AddScoped<PasswordHashInterface, PasswordHash>();
 
 builder.Services.AddScoped<ICreateUser, CreateUser>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ICreateCountService, CreateCountService>();
+builder.Services.AddScoped<ICriarTransferenciaService, CriarTransferenciaService>();
 
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(op =>
+    {
+        op.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    }
+    );
 
 var app = builder.Build();
 

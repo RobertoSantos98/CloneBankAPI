@@ -10,6 +10,6 @@ namespace CloneBankAPI.Infrastructure.Repositories.UsuarioRepository
         Task<Usuario?> GetUsuarioByEmail(string email);
         Task<Usuario?> GetUsuarioByCPF(string cpf);
         Task CommitChanges();
-
+        Task UpdateUsuario(Usuario usuario);
     }
 }
